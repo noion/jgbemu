@@ -14,7 +14,7 @@ public class CartridgeHeader {
     private final byte[] entryPoint;
     private final byte[] nintendoLogo;
     private final String title;
-    private final String  manufacturerCode;
+    private final String manufacturerCode;
     private final byte cgbFlag;
     private final byte[] newLicenseeCode;
     private final byte sgbFlag;
@@ -72,5 +72,17 @@ public class CartridgeHeader {
         //$00: No SGB functions (Normal Game Boy or CGB only game)
         //$03: Game supports SGB functions
         return sgbFlag == (byte) 0x03;
+    }
+
+    public boolean isJapanese() {
+        //$00: Japanese
+        //$01: Non-Japanese
+        return destinationCode == (byte) 0x00;
+    }
+
+    public boolean isOldLicenseCode() {
+        // A value of $33 signals that the New Licensee Code.
+        // Super Game Boy functions won’t work if <> $33.
+        return oldLicenseeCode == (byte) 0x33;
     }
 }
