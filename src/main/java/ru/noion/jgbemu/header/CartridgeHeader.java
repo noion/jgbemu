@@ -61,4 +61,16 @@ public class CartridgeHeader {
         //014E-014F - Global Checksum
         globalChecksum = extractData(romByteArray, 0x14E, 0x150);
     }
+
+    public boolean isCgbOnly() {
+        //80h - Game supports CGB functions, but also works on old Game Boys.
+        //C0h - Game works on CGB only (physically the same as $80).
+        return cgbFlag == (byte) 0xC0;
+    }
+
+    public boolean isSgb() {
+        //$00: No SGB functions (Normal Game Boy or CGB only game)
+        //$03: Game supports SGB functions
+        return sgbFlag == 0x03;
+    }
 }
