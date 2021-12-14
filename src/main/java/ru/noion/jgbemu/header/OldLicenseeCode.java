@@ -1,9 +1,11 @@
 package ru.noion.jgbemu.header;
 
 import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
 import java.util.Arrays;
 
+@ToString
 @RequiredArgsConstructor
 public enum OldLicenseeCode {
     NONE("00", "none"),

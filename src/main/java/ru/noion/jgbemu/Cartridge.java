@@ -3,6 +3,7 @@ package ru.noion.jgbemu;
 import ru.noion.jgbemu.header.CartridgeHeader;
 import ru.noion.jgbemu.header.NewLicenseeCode;
 import ru.noion.jgbemu.header.OldLicenseeCode;
+import ru.noion.jgbemu.header.RomSize;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,7 +21,8 @@ public class Cartridge {
             System.out.println(cartridgeHeader);
             System.out.printf("Title %s%n", cartridgeHeader.getTitle());
             printLicenseCode(cartridgeHeader);
-            var cartridgeType = ByteToHex.bytesToHex(cartridgeHeader.getCartridgeType());
+            var romSize = RomSize.getByCode(cartridgeHeader.getCartridgeType());
+            System.out.printf("Rom size %s%n", romSize);
             return true;
         } catch (IOException e) {
             e.printStackTrace();
