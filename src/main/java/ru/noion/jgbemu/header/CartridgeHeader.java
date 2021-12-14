@@ -71,6 +71,6 @@ public class CartridgeHeader {
     public boolean isSgb() {
         //$00: No SGB functions (Normal Game Boy or CGB only game)
         //$03: Game supports SGB functions
-        return sgbFlag == 0x03;
+        return sgbFlag == (byte) 0x03;
     }
 }
