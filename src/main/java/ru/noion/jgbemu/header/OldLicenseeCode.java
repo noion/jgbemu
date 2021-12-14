@@ -159,7 +159,7 @@ public enum OldLicenseeCode {
 
     public static OldLicenseeCode getByHexCode(String hexCode) {
         return Arrays.stream(OldLicenseeCode.values())
-                .filter(newLicenseeCode -> newLicenseeCode.hexCode.equals(hexCode))
+                .filter(oldLicenseeCode -> oldLicenseeCode.hexCode.equals(hexCode))
                 .findAny()
                 .orElseThrow(() -> new EnumConstantNotPresentException(OldLicenseeCode.class, hexCode));
     }
