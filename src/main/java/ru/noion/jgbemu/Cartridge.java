@@ -26,6 +26,8 @@ public class Cartridge {
             System.out.printf("Rom size %s%n", romSize);
             var ramSize = RamSize.getByCode(cartridgeHeader.getRamSize());
             System.out.printf("Ram size %s%n", ramSize);
+            var isCheckPassed = checkHeader(romData, cartridgeHeader.getHeaderChecksum());
+            System.out.printf("Check passed %s%n", isCheckPassed);
             return true;
         } catch (IOException e) {
             e.printStackTrace();
@@ -44,5 +46,13 @@ public class Cartridge {
         var licenseCode = ByteToHex.bytesToHex(cartridgeHeader.getOldLicenseeCode());
         var oldLicenseeCode = OldLicenseeCode.getByHexCode(licenseCode);
         System.out.printf("OldLicenseeCode %s%n", oldLicenseeCode);
+    }
+
+    private boolean checkHeader(byte[] romData, byte headerChecksum) {
+        byte x = 0;
+        for (var i = 0x0134; i <= 0x014C; i++) {
+            x = (byte) (x - romData[i] - 1);
+        }
+        return headerChecksum == x;
     }
 }
