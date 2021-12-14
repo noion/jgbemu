@@ -1,6 +1,7 @@
 package ru.noion.jgbemu;
 
 import ru.noion.jgbemu.header.CartridgeHeader;
+import ru.noion.jgbemu.header.CartridgeType;
 import ru.noion.jgbemu.header.NewLicenseeCode;
 import ru.noion.jgbemu.header.OldLicenseeCode;
 import ru.noion.jgbemu.header.RamSize;
@@ -22,7 +23,9 @@ public class Cartridge {
             System.out.println(cartridgeHeader);
             System.out.printf("Title %s%n", cartridgeHeader.getTitle());
             printLicenseCode(cartridgeHeader);
-            var romSize = RomSize.getByCode(cartridgeHeader.getCartridgeType());
+            var cartridgeType = CartridgeType.getByCode(cartridgeHeader.getCartridgeType());
+            System.out.printf("Cartridge type %s%n", cartridgeType);
+            var romSize = RomSize.getByCode(cartridgeHeader.getRomSize());
             System.out.printf("Rom size %s%n", romSize);
             var ramSize = RamSize.getByCode(cartridgeHeader.getRamSize());
             System.out.printf("Ram size %s%n", ramSize);
@@ -43,8 +46,7 @@ public class Cartridge {
             System.out.printf("NewLicenseeCode %s%n", newLicenseeCode);
             return;
         }
-        var licenseCode = ByteToHex.bytesToHex(cartridgeHeader.getOldLicenseeCode());
-        var oldLicenseeCode = OldLicenseeCode.getByHexCode(licenseCode);
+        var oldLicenseeCode = OldLicenseeCode.getCode(cartridgeHeader.getOldLicenseeCode());
         System.out.printf("OldLicenseeCode %s%n", oldLicenseeCode);
     }
 
