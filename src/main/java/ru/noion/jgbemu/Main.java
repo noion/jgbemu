@@ -1,5 +1,8 @@
 package ru.noion.jgbemu;
 
+import ru.noion.jgbemu.cpu.Cpu;
+import ru.noion.jgbemu.cpu.CpuState;
+
 import java.nio.file.Path;
 
 public class Main {
@@ -11,16 +14,20 @@ public class Main {
         }
         var filePath = args[0];
         System.out.printf("Rom file name %s%n", filePath);
-        var cart = new Cartridge();
+        var cartridge = new Cartridge();
         var path = Path.of(filePath);
         var romFile = path.toFile();
         if (!romFile.exists() || !romFile.isFile()) {
             System.out.println("Rom file incorrect");
         }
-        if (!cart.loadCartridge(romFile)) {
+        if (!cartridge.loadCartridge(romFile)) {
             System.out.println("Rom not load");
             return;
         }
+        var cpuState = new CpuState();
+        var bus = new Bus(cartridge);
+        var cpu = new Cpu(cpuState, bus);
+        cpu.cpuStep();
         //TODO calculate ticks
     }
 }

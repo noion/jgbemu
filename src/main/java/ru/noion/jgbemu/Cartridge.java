@@ -14,9 +14,11 @@ import java.nio.file.Files;
 
 public class Cartridge {
 
+    private byte[] romData;
+
     public boolean loadCartridge(File romFile) {
         try {
-            byte[] romData = Files.readAllBytes(romFile.toPath());
+            romData = Files.readAllBytes(romFile.toPath());
             System.out.printf("Rom file size %s%n", romData.length);
             System.out.println("Cartridge Loading:");
             var cartridgeHeader = new CartridgeHeader(romData);
@@ -56,5 +58,9 @@ public class Cartridge {
             x = (byte) (x - romData[i] - 1);
         }
         return headerChecksum == x;
+    }
+
+    public byte read(short address) {
+        return romData[address];
     }
 }
