@@ -27,7 +27,9 @@ public class Main {
         var cpuState = new CpuState();
         var bus = new Bus(cartridge);
         var cpu = new Cpu(cpuState, bus);
-        cpu.cpuStep();
+        while (true) {
+            cpu.cpuStep();
+        }
         //TODO calculate ticks
     }
 }

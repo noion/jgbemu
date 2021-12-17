@@ -21,7 +21,9 @@ public class Bus {
     private final Cartridge cartridge;
 
     public byte read(short address) {
-        if (address < (byte) 0x8000) {
+        var unsignedAddress = ConvertToUnsigned.unsigned(address);
+        var unsignedMaxRomBankAddress = ConvertToUnsigned.unsigned((short) 0x8000);
+        if (unsignedAddress < unsignedMaxRomBankAddress) {
             return cartridge.read(address);
         }
         throw new UnsupportedOperationException();

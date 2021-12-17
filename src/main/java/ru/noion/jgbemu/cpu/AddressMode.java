@@ -1,6 +1,7 @@
 package ru.noion.jgbemu.cpu;
 
 public enum AddressMode {
+    NONE,
     REG_D16,
     REG_D8,
     REG_REG,

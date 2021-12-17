@@ -2,10 +2,9 @@ package ru.noion.jgbemu.header;
 
 import lombok.Getter;
 import lombok.ToString;
+import ru.noion.jgbemu.ByteDataExtractor;
 
 import java.nio.charset.StandardCharsets;
-
-import static ru.noion.jgbemu.ByteDataExtractor.extractData;
 
 @Getter
 @ToString
@@ -29,19 +28,19 @@ public class CartridgeHeader {
 
     public CartridgeHeader(byte[] romByteArray) {
         //0100-0103 - Entry Point
-        entryPoint = extractData(romByteArray, 0x100, 0x104);
+        entryPoint = ByteDataExtractor.extractData(romByteArray, 0x100, 0x104);
         //0104-0133 - Nintendo Logo
-        nintendoLogo = extractData(romByteArray, 0x104, 0x134);
+        nintendoLogo = ByteDataExtractor.extractData(romByteArray, 0x104, 0x134);
         //0134-0143 - Title
-        var titleByteArray = extractData(romByteArray, 0x134, 0x144);
+        var titleByteArray = ByteDataExtractor.extractData(romByteArray, 0x134, 0x144);
         title = new String(titleByteArray, StandardCharsets.US_ASCII).trim();
         //013F-0142 - Manufacturer Code
-        var manufacturerCodeByteArray = extractData(romByteArray, 0x13F, 0x143);
+        var manufacturerCodeByteArray = ByteDataExtractor.extractData(romByteArray, 0x13F, 0x143);
         manufacturerCode = new String(manufacturerCodeByteArray, StandardCharsets.US_ASCII).trim();
         //0143 - CGB Flag
         cgbFlag = romByteArray[0x143];
         //0144-0145 - New Licensee Code
-        newLicenseeCode = extractData(romByteArray, 0x144, 0x146);
+        newLicenseeCode = ByteDataExtractor.extractData(romByteArray, 0x144, 0x146);
         //0146 - SGB Flag
         sgbFlag = romByteArray[0x146];
         //0147 - Cartridge Type
@@ -59,7 +58,7 @@ public class CartridgeHeader {
         //014D - Header Checksum
         headerChecksum = romByteArray[0x14D];
         //014E-014F - Global Checksum
-        globalChecksum = extractData(romByteArray, 0x14E, 0x150);
+        globalChecksum = ByteDataExtractor.extractData(romByteArray, 0x14E, 0x150);
     }
 
     public boolean isCgbOnly() {

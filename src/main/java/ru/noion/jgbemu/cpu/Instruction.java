@@ -14,4 +14,5 @@ public class Instruction {
     private final Registers registerTo;
     private final ConditionType conditionType;
     private final byte duration; // TODO may be not need not in current state not obvious
+    private final InstructionExecution instructionExecution;
 }
