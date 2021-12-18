@@ -10,10 +10,12 @@ public class LdExecution implements InstructionExecution {
     public boolean execute(CpuState cpuState, Bus bus, Instruction instruction, Short data) {
         var registerTo = instruction.getRegisterTo();
         var registerFrom = instruction.getRegisterFrom();
-        if (instruction.getAddressMode() == AddressMode.D16_REG && registerTo != null) {
-            cpuState.getRegisters().setRegisterShort(registerTo, data);
-        } else if (instruction.getAddressMode() == AddressMode.REG_MEM && registerFrom != null) {
-            var registerByte = cpuState.getRegisters().getRegisterByte(registerFrom);
+        var addressMode = instruction.getAddressMode();
+        var registers = cpuState.getRegisters();
+        if (addressMode == AddressMode.D16_REG && registerTo != null) {
+            registers.setRegister(registerTo, data);
+        } else if (addressMode == AddressMode.REG_MEM && registerFrom != null) {
+            var registerByte = registers.getRegister(registerFrom);
             bus.write(data, registerByte);
         } else {
             throw new UnsupportedOperationException(instruction.toString());

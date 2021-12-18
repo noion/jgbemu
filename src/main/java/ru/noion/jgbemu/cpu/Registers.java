@@ -41,7 +41,7 @@ public class Registers {
         }
     }
 
-    public void setRegisterShort(RegisterType registerType, short value) {
+    public void setRegister(RegisterType registerType, short value) {
         switch (registerType) {
             case SP:
                 SP = value;
@@ -51,7 +51,7 @@ public class Registers {
         }
     }
 
-    public byte getRegisterByte(RegisterType registerType) {
+    public byte getRegister(RegisterType registerType) {
         switch (registerType) {
             case A:
                 return A;
