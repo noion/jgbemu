@@ -36,6 +36,8 @@ public class Cpu {
         switch (addressMode) {
             case NONE:
                 return null;
+            case D16_REG:
+            case REG_MEM:
             case D16:
                 var pc = cpuState.getRegisters().getPcAndIncrement();
                 byte lo = bus.read(pc);
