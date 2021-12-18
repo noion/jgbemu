@@ -32,19 +32,16 @@ public class Cpu {
     }
 
     private byte[] fetchData(Instruction instruction) {
-        var addressMode = instruction.getAddressMode();
-        switch (addressMode) {
+        var dataFetchMode = instruction.getAddressMode().getDataFetchMode();
+        switch (dataFetchMode) {
             case NONE:
                 return null;
-            case D16_REG:
-            case REG_MEM:
             case D16:
                 var pc = cpuState.getRegisters().getPcAndIncrement();
                 byte lo = bus.read(pc);
                 pc = cpuState.getRegisters().getPcAndIncrement();
                 byte hi = bus.read(pc);
                 return new byte[]{lo, hi};
-            case D8_REG:
             case D8:
                 pc = cpuState.getRegisters().getPcAndIncrement();
                 return new byte[]{bus.read(pc)};
