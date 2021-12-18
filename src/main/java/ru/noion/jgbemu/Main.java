@@ -25,7 +25,8 @@ public class Main {
             return;
         }
         var cpuState = new CpuState();
-        var bus = new Bus(cartridge);
+        var ram = new Ram();
+        var bus = new Bus(cartridge, ram);
         var cpu = new Cpu(cpuState, bus);
         while (true) {
             cpu.cpuStep();

@@ -60,7 +60,11 @@ public class Cartridge {
         return headerChecksum == x;
     }
 
-    public byte read(short address) {
-        return romData[address];
+    public byte read(int unsignedAddress) {
+        return romData[unsignedAddress];
+    }
+
+    public void write(int unsignedAddress, byte value) {
+        romData[unsignedAddress] = value;
     }
 }
