@@ -10,6 +10,6 @@ public class UnsignedConvertor {
     }
 
     public int unsigned(short value) {
-        return 0xF000 & value;
+        return 0xFFFF & value;
     }
 }
