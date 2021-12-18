@@ -8,6 +8,7 @@ import ru.noion.jgbemu.cpu.instruction.DiExecution;
 import ru.noion.jgbemu.cpu.instruction.Instruction;
 import ru.noion.jgbemu.cpu.instruction.JpExecution;
 import ru.noion.jgbemu.cpu.instruction.LdExecution;
+import ru.noion.jgbemu.cpu.instruction.LdhExecution;
 import ru.noion.jgbemu.cpu.instruction.NopExecution;
 
 import java.util.HashMap;
@@ -49,6 +50,12 @@ public class CpuInstruction {
                 .addressMode(AddressMode.D8_REG)
                 .registerTo(RegisterType.A)
                 .instructionExecution(new AdcExecution())
+                .build());
+        tmpInstructions.put((byte) 0xE0, Instruction.builder()
+                .instructionMnemonic(InstructionMnemonic.LDH)
+                .addressMode(AddressMode.REG_A8)
+                .registerFrom(RegisterType.A)
+                .instructionExecution(new LdhExecution())
                 .build());
         tmpInstructions.put((byte) 0xEA, Instruction.builder()
                 .instructionMnemonic(InstructionMnemonic.LD)
