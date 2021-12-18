@@ -19,6 +19,9 @@ public class LdExecution implements InstructionExecution {
             var registerByte = registers.getRegister(registerFrom);
             var value = ByteArrayConvertor.byteArrayToShort(data);
             bus.write(value, registerByte);
+        } else if (addressMode == AddressMode.D8_REG && registerTo != null) {
+            var value = data[0];
+            registers.setRegister(registerTo, value);
         } else {
             throw new UnsupportedOperationException(instruction.toString());
         }

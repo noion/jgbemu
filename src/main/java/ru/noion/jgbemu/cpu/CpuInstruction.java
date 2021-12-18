@@ -33,6 +33,12 @@ public class CpuInstruction {
                 .registerTo(RegisterType.SP)
                 .instructionExecution(ldExecution)
                 .build());
+        tmpInstructions.put((byte) 0x3E, Instruction.builder()
+                .instructionMnemonic(InstructionMnemonic.LD)
+                .addressMode(AddressMode.D8_REG)
+                .registerTo(RegisterType.A)
+                .instructionExecution(ldExecution)
+                .build());
         tmpInstructions.put((byte) 0xC3, Instruction.builder()
                 .instructionMnemonic(InstructionMnemonic.JP)
                 .addressMode(AddressMode.D16)
@@ -45,10 +51,10 @@ public class CpuInstruction {
                 .instructionExecution(new AdcExecution())
                 .build());
         tmpInstructions.put((byte) 0xEA, Instruction.builder()
-                        .instructionMnemonic(InstructionMnemonic.LD)
-                        .addressMode(AddressMode.REG_MEM)
-                        .registerFrom(RegisterType.A)
-                        .instructionExecution(ldExecution)
+                .instructionMnemonic(InstructionMnemonic.LD)
+                .addressMode(AddressMode.REG_MEM)
+                .registerFrom(RegisterType.A)
+                .instructionExecution(ldExecution)
                 .build());
         tmpInstructions.put((byte) 0xFE, Instruction.builder()
                 .instructionMnemonic(InstructionMnemonic.CP)
