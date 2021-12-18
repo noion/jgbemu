@@ -3,6 +3,7 @@ package ru.noion.jgbemu.cpu;
 import lombok.RequiredArgsConstructor;
 import ru.noion.jgbemu.Bus;
 import ru.noion.jgbemu.ConvertToUnsigned;
+import ru.noion.jgbemu.cpu.instruction.Instruction;
 
 @RequiredArgsConstructor
 public class Cpu {
@@ -13,9 +14,12 @@ public class Cpu {
     public boolean cpuStep() {
         if (!cpuState.isHalt()) {
             var instruction = fetchInstruction();
+            System.out.printf("Instruction %s%n", instruction);
             var data = fetchData(instruction);
             System.out.printf("%s %n", data);
-            instruction.getInstructionExecution().execute(cpuState, instruction, data);
+            System.out.printf("Cpu state before execute %s%n", cpuState);
+            instruction.getInstructionExecution().execute(cpuState, bus, instruction, data);
+            System.out.printf("Cpu state before after %s%n", cpuState);
             return true;
         }
         return false;
