@@ -41,6 +41,25 @@ public class Registers {
         }
     }
 
+    public void setRegisterShort(RegisterType registerType, short value) {
+        switch (registerType) {
+            case SP:
+                SP = value;
+                break;
+            default:
+                throw new UnsupportedOperationException(registerType.toString());
+        }
+    }
+
+    public byte getRegisterByte(RegisterType registerType) {
+        switch (registerType) {
+            case A:
+                return A;
+            default:
+                throw new UnsupportedOperationException(registerType.toString());
+        }
+    }
+
     @RequiredArgsConstructor
     public enum Flag {
         z((byte) 7),
