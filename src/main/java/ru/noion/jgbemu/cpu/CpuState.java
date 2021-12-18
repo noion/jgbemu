@@ -1,11 +1,16 @@
 package ru.noion.jgbemu.cpu;
 
-import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-@Getter(AccessLevel.PACKAGE)
+@Getter
+@ToString
 public class CpuState {
 
-    private final boolean halt = false;
+    @Setter
+    private boolean halt = false;
+    @Setter
+    private boolean ime = true;
     private final Registers registers = new Registers();
 }
