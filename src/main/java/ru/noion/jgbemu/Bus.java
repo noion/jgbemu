@@ -31,7 +31,7 @@ public class Bus {
 
     public void write(short address, byte value) {
         var unsignedAddress = UnsignedConvertor.unsigned(address);
-        var minRamAddress = 0xA000;
+        var minRamAddress = 0x8000;
         var maxRamAddress = 0xDFFF;
         if (minRamAddress <= unsignedAddress && unsignedAddress <= maxRamAddress) {
 //            TODO write data
