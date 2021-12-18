@@ -7,16 +7,18 @@ import ru.noion.jgbemu.cpu.CpuState;
 public class LdExecution implements InstructionExecution {
 
     @Override
-    public boolean execute(CpuState cpuState, Bus bus, Instruction instruction, Short data) {
+    public boolean execute(CpuState cpuState, Bus bus, Instruction instruction, byte[] data) {
         var registerTo = instruction.getRegisterTo();
         var registerFrom = instruction.getRegisterFrom();
         var addressMode = instruction.getAddressMode();
         var registers = cpuState.getRegisters();
         if (addressMode == AddressMode.D16_REG && registerTo != null) {
-            registers.setRegister(registerTo, data);
+            var value = ByteArrayConvertor.byteArrayToShort(data);
+            registers.setRegister(registerTo, value);
         } else if (addressMode == AddressMode.REG_MEM && registerFrom != null) {
             var registerByte = registers.getRegister(registerFrom);
-            bus.write(data, registerByte);
+            var value = ByteArrayConvertor.byteArrayToShort(data);
+            bus.write(value, registerByte);
         } else {
             throw new UnsupportedOperationException(instruction.toString());
         }

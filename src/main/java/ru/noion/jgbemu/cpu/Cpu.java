@@ -2,7 +2,7 @@ package ru.noion.jgbemu.cpu;
 
 import lombok.RequiredArgsConstructor;
 import ru.noion.jgbemu.Bus;
-import ru.noion.jgbemu.ConvertToUnsigned;
+import ru.noion.jgbemu.ByteToHex;
 import ru.noion.jgbemu.cpu.instruction.Instruction;
 
 @RequiredArgsConstructor
@@ -16,7 +16,7 @@ public class Cpu {
             var instruction = fetchInstruction();
             System.out.printf("Instruction %s%n", instruction);
             var data = fetchData(instruction);
-            System.out.printf("%s %n", data);
+            System.out.printf("%s %n", ByteToHex.bytesToHex(data));
             System.out.printf("Cpu state before execute %s%n", cpuState);
             instruction.getInstructionExecution().execute(cpuState, bus, instruction, data);
             System.out.printf("Cpu state before after %s%n", cpuState);
@@ -31,7 +31,7 @@ public class Cpu {
         return CpuInstruction.getInstructionByOpCode(opCode);
     }
 
-    private Short fetchData(Instruction instruction) {
+    private byte[] fetchData(Instruction instruction) {
         var addressMode = instruction.getAddressMode();
         switch (addressMode) {
             case NONE:
@@ -42,11 +42,12 @@ public class Cpu {
                 var pc = cpuState.getRegisters().getPcAndIncrement();
                 byte lo = bus.read(pc);
                 pc = cpuState.getRegisters().getPcAndIncrement();
-                short hi = bus.read(pc);
-                return (short) (ConvertToUnsigned.unsigned(lo) | hi << 8);
+                byte hi = bus.read(pc);
+                return new byte[]{lo, hi};
+            case D8_REG:
             case D8:
                 pc = cpuState.getRegisters().getPcAndIncrement();
-                return (short) bus.read(pc);
+                return new byte[]{bus.read(pc)};
             default:
                 throw new UnsupportedOperationException(instruction.toString());
         }
