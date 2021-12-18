@@ -28,4 +28,15 @@ public class Bus {
         }
         throw new UnsupportedOperationException();
     }
+
+    public void write(short address, byte value) {
+        var unsignedAddress = ConvertToUnsigned.unsigned(address);
+        var minRamAddress = 0xA000;
+        var maxRamAddress = 0xDFFF;
+        if (minRamAddress <= unsignedAddress && unsignedAddress <= maxRamAddress) {
+//            TODO write data
+            return;
+        }
+        throw new UnsupportedOperationException(String.valueOf(address));
+    }
 }
