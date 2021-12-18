@@ -51,6 +51,16 @@ public class Registers {
         }
     }
 
+    public void setRegister(RegisterType registerType, byte value) {
+        switch (registerType) {
+            case A:
+                A = value;
+                break;
+            default:
+                throw new UnsupportedOperationException(registerType.toString());
+        }
+    }
+
     public byte getRegister(RegisterType registerType) {
         switch (registerType) {
             case A:
