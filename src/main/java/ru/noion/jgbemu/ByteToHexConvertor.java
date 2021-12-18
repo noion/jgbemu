@@ -3,7 +3,7 @@ package ru.noion.jgbemu;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
-public class ByteToHex {
+public class ByteToHexConvertor {
     private static final char[] HEX_ARRAY = "0123456789ABCDEF".toCharArray();
 
     public static String bytesToHex(byte... bytes) {

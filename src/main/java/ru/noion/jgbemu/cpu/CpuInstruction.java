@@ -1,7 +1,7 @@
 package ru.noion.jgbemu.cpu;
 
 import lombok.experimental.UtilityClass;
-import ru.noion.jgbemu.ByteToHex;
+import ru.noion.jgbemu.ByteToHexConvertor;
 import ru.noion.jgbemu.cpu.instruction.AdcExecution;
 import ru.noion.jgbemu.cpu.instruction.CpExecution;
 import ru.noion.jgbemu.cpu.instruction.DiExecution;
@@ -66,7 +66,7 @@ public class CpuInstruction {
     Instruction getInstructionByOpCode(byte opCode) {
         var instruction = instructions.get(opCode);
         if (instruction == null) {
-            System.out.printf("Unknown opCode %s%n", ByteToHex.bytesToHex(opCode));
+            System.out.printf("Unknown opCode %s%n", ByteToHexConvertor.bytesToHex(opCode));
             throw new UnsupportedOperationException(String.valueOf(opCode));
         }
         return instruction;

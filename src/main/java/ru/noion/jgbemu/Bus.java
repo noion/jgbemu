@@ -21,7 +21,7 @@ public class Bus {
     private final Cartridge cartridge;
 
     public byte read(short address) {
-        var unsignedAddress = ConvertToUnsigned.unsigned(address);
+        var unsignedAddress = UnsignedConvertor.unsigned(address);
         var maxRomAddress = 0x7FFF;
         if (unsignedAddress <= maxRomAddress) {
             return cartridge.read(address);
@@ -30,7 +30,7 @@ public class Bus {
     }
 
     public void write(short address, byte value) {
-        var unsignedAddress = ConvertToUnsigned.unsigned(address);
+        var unsignedAddress = UnsignedConvertor.unsigned(address);
         var minRamAddress = 0xA000;
         var maxRamAddress = 0xDFFF;
         if (minRamAddress <= unsignedAddress && unsignedAddress <= maxRamAddress) {

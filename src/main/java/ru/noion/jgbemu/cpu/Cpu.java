@@ -2,7 +2,7 @@ package ru.noion.jgbemu.cpu;
 
 import lombok.RequiredArgsConstructor;
 import ru.noion.jgbemu.Bus;
-import ru.noion.jgbemu.ByteToHex;
+import ru.noion.jgbemu.ByteToHexConvertor;
 import ru.noion.jgbemu.cpu.instruction.Instruction;
 
 @RequiredArgsConstructor
@@ -16,7 +16,7 @@ public class Cpu {
             var instruction = fetchInstruction();
             System.out.printf("Instruction %s%n", instruction);
             var data = fetchData(instruction);
-            System.out.printf("%s %n", ByteToHex.bytesToHex(data));
+            System.out.printf("%s %n", ByteToHexConvertor.bytesToHex(data));
             System.out.printf("Cpu state before execute %s%n", cpuState);
             instruction.getInstructionExecution().execute(cpuState, bus, instruction, data);
             System.out.printf("Cpu state before after %s%n", cpuState);
