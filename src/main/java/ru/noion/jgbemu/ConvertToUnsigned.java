@@ -5,11 +5,11 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class ConvertToUnsigned {
 
-    public byte unsigned(byte value) {
-        return (byte) (0xFF & value);
+    public short unsigned(byte value) {
+        return (short) (0xFF & value);
     }
 
-    public short unsigned(short value) {
-        return (short) (0xFFFF & value);
+    public int unsigned(short value) {
+        return 0xF000 & value;
     }
 }
