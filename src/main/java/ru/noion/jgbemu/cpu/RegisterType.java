@@ -1,7 +1,9 @@
 package ru.noion.jgbemu.cpu;
 
+import lombok.ToString;
+
+@ToString
 public enum RegisterType {
-    NONE,
     A,
     F,
     B,
