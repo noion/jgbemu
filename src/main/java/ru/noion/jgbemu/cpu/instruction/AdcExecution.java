@@ -1,9 +1,14 @@
-package ru.noion.jgbemu.cpu;
+package ru.noion.jgbemu.cpu.instruction;
+
+import ru.noion.jgbemu.Bus;
+import ru.noion.jgbemu.cpu.CpuState;
+import ru.noion.jgbemu.cpu.Registers;
 
 public class AdcExecution implements InstructionExecution {
 
     @Override
-    public boolean execute(CpuState cpuState, Instruction instruction, Short data) {
+    public boolean execute(CpuState cpuState, Bus bus, Instruction instruction, Short data) {
+        //TODO check is correct
         var registers = cpuState.getRegisters();
         var a = registers.getA();
         a += data + registers.getFlag(Registers.Flag.c);
