@@ -6,8 +6,8 @@ public enum AddressMode {
     REG_D8,
     REG_REG,
     REG_MEM,
-    RGG_A8,
-    R_A16,
+    REG_A8,
+    REG_A16,
     REG,
     D16,
     D8,
@@ -15,6 +15,5 @@ public enum AddressMode {
     D16_REG,
     D8_REG,
     MEM_REG,
-    A8_REG,
-    A16_REG,
+    A8_REG;
 }
