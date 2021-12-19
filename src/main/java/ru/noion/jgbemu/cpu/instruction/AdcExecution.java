@@ -7,7 +7,7 @@ import ru.noion.jgbemu.cpu.Registers;
 public class AdcExecution implements InstructionExecution {
 
     @Override
-    public boolean execute(CpuState cpuState, Bus bus, Instruction instruction, byte[] data) {
+    public void execute(CpuState cpuState, Bus bus, Instruction instruction, byte[] data) {
         //TODO check is correct
         var registers = cpuState.getRegisters();
         var a = registers.getA();
@@ -15,6 +15,5 @@ public class AdcExecution implements InstructionExecution {
         a += data[0] + registers.getFlag(Registers.Flag.c);
         registers.setA(a);
         registers.setFlag(Registers.Flag.n, false);
-        return true;
     }
 }

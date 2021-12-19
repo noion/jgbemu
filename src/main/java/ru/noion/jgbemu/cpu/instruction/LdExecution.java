@@ -7,7 +7,7 @@ import ru.noion.jgbemu.cpu.CpuState;
 public class LdExecution implements InstructionExecution {
 
     @Override
-    public boolean execute(CpuState cpuState, Bus bus, Instruction instruction, byte[] data) {
+    public void execute(CpuState cpuState, Bus bus, Instruction instruction, byte[] data) {
         var registerTo = instruction.getRegisterTo();
         var registerFrom = instruction.getRegisterFrom();
         var addressMode = instruction.getAddressMode();
@@ -25,6 +25,5 @@ public class LdExecution implements InstructionExecution {
         } else {
             throw new UnsupportedOperationException(instruction.toString());
         }
-        return true;
     }
 }

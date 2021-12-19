@@ -5,8 +5,7 @@ import ru.noion.jgbemu.cpu.CpuState;
 
 public class DiExecution implements InstructionExecution {
     @Override
-    public boolean execute(CpuState cpuState, Bus bus, Instruction instruction, byte[] data) {
+    public void execute(CpuState cpuState, Bus bus, Instruction instruction, byte[] data) {
         cpuState.setIme(false);
-        return true;
     }
 }
