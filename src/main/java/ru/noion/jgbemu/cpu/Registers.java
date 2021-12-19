@@ -94,6 +94,20 @@ public class Registers {
         switch (registerType) {
             case A:
                 return A;
+            case F:
+                return F;
+            case B:
+                return B;
+            case C:
+                return C;
+            case D:
+                return D;
+            case E:
+                return E;
+            case H:
+                return H;
+            case L:
+                return L;
             default:
                 throw new UnsupportedOperationException(registerType.toString());
         }

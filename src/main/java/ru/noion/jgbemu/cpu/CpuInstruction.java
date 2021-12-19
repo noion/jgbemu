@@ -11,6 +11,7 @@ import ru.noion.jgbemu.cpu.instruction.LdExecution;
 import ru.noion.jgbemu.cpu.instruction.LdhExecution;
 import ru.noion.jgbemu.cpu.instruction.NopExecution;
 import ru.noion.jgbemu.cpu.instruction.PopExecution;
+import ru.noion.jgbemu.cpu.instruction.PushExecution;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,7 +23,8 @@ public class CpuInstruction {
 
     static {
         var ldExecution = new LdExecution();
-        var instructionExecution = new PopExecution();
+        var popExecution = new PopExecution();
+        var pushExecution = new PushExecution();
         var tmpInstructions = new HashMap<Byte, Instruction>();
         tmpInstructions.put((byte) 0x00, Instruction.builder()
                 .instructionMnemonic(InstructionMnemonic.NOP)
@@ -46,12 +48,18 @@ public class CpuInstruction {
                 .instructionMnemonic(InstructionMnemonic.POP)
                 .addressMode(AddressMode.NONE)
                 .registerTo(RegisterType.BC)
-                .instructionExecution(instructionExecution)
+                .instructionExecution(popExecution)
                 .build());
         tmpInstructions.put((byte) 0xC3, Instruction.builder()
                 .instructionMnemonic(InstructionMnemonic.JP)
                 .addressMode(AddressMode.D16)
                 .instructionExecution(new JpExecution())
+                .build());
+        tmpInstructions.put((byte) 0xC5, Instruction.builder()
+                .instructionMnemonic(InstructionMnemonic.PUSH)
+                .addressMode(AddressMode.NONE)
+                .registerFrom(RegisterType.BC)
+                .instructionExecution(pushExecution)
                 .build());
         tmpInstructions.put((byte) 0xCE, Instruction.builder()
                 .instructionMnemonic(InstructionMnemonic.ADC)
@@ -63,7 +71,13 @@ public class CpuInstruction {
                 .instructionMnemonic(InstructionMnemonic.POP)
                 .addressMode(AddressMode.NONE)
                 .registerTo(RegisterType.DE)
-                .instructionExecution(instructionExecution)
+                .instructionExecution(popExecution)
+                .build());
+        tmpInstructions.put((byte) 0xD5, Instruction.builder()
+                .instructionMnemonic(InstructionMnemonic.PUSH)
+                .addressMode(AddressMode.NONE)
+                .registerFrom(RegisterType.DE)
+                .instructionExecution(pushExecution)
                 .build());
         tmpInstructions.put((byte) 0xE0, Instruction.builder()
                 .instructionMnemonic(InstructionMnemonic.LDH)
@@ -75,7 +89,13 @@ public class CpuInstruction {
                 .instructionMnemonic(InstructionMnemonic.POP)
                 .addressMode(AddressMode.NONE)
                 .registerTo(RegisterType.HL)
-                .instructionExecution(instructionExecution)
+                .instructionExecution(popExecution)
+                .build());
+        tmpInstructions.put((byte) 0xE5, Instruction.builder()
+                .instructionMnemonic(InstructionMnemonic.PUSH)
+                .addressMode(AddressMode.NONE)
+                .registerFrom(RegisterType.HL)
+                .instructionExecution(pushExecution)
                 .build());
         tmpInstructions.put((byte) 0xEA, Instruction.builder()
                 .instructionMnemonic(InstructionMnemonic.LD)
@@ -87,7 +107,13 @@ public class CpuInstruction {
                 .instructionMnemonic(InstructionMnemonic.POP)
                 .addressMode(AddressMode.NONE)
                 .registerTo(RegisterType.AF)
-                .instructionExecution(instructionExecution)
+                .instructionExecution(popExecution)
+                .build());
+        tmpInstructions.put((byte) 0xF5, Instruction.builder()
+                .instructionMnemonic(InstructionMnemonic.PUSH)
+                .addressMode(AddressMode.NONE)
+                .registerFrom(RegisterType.AF)
+                .instructionExecution(pushExecution)
                 .build());
         tmpInstructions.put((byte) 0xFE, Instruction.builder()
                 .instructionMnemonic(InstructionMnemonic.CP)
