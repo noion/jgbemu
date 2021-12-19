@@ -27,6 +27,7 @@ public class CpuInstruction {
         var popExecution = new PopExecution();
         var pushExecution = new PushExecution();
         var callExecution = new CallExecution();
+        var jpExecution = new JpExecution();
         var tmpInstructions = new HashMap<Byte, Instruction>();
         tmpInstructions.put((byte) 0x00, Instruction.builder()
                 .instructionMnemonic(InstructionMnemonic.NOP)
@@ -56,12 +57,12 @@ public class CpuInstruction {
                 .instructionMnemonic(InstructionMnemonic.JP)
                 .addressMode(AddressMode.A16)
                 .conditionType(ConditionType.NZ)
-                .instructionExecution(new JpExecution())
+                .instructionExecution(jpExecution)
                 .build());
         tmpInstructions.put((byte) 0xC3, Instruction.builder()
                 .instructionMnemonic(InstructionMnemonic.JP)
                 .addressMode(AddressMode.A16)
-                .instructionExecution(new JpExecution())
+                .instructionExecution(jpExecution)
                 .build());
         tmpInstructions.put((byte) 0xC4, Instruction.builder()
                 .instructionMnemonic(InstructionMnemonic.CALL)
@@ -79,7 +80,7 @@ public class CpuInstruction {
                 .instructionMnemonic(InstructionMnemonic.JP)
                 .addressMode(AddressMode.A16)
                 .conditionType(ConditionType.Z)
-                .instructionExecution(new JpExecution())
+                .instructionExecution(jpExecution)
                 .build());
         tmpInstructions.put((byte) 0xCC, Instruction.builder()
                 .instructionMnemonic(InstructionMnemonic.CALL)
@@ -108,7 +109,7 @@ public class CpuInstruction {
                 .instructionMnemonic(InstructionMnemonic.JP)
                 .addressMode(AddressMode.A16)
                 .conditionType(ConditionType.NC)
-                .instructionExecution(new JpExecution())
+                .instructionExecution(jpExecution)
                 .build());
         tmpInstructions.put((byte) 0xD4, Instruction.builder()
                 .instructionMnemonic(InstructionMnemonic.CALL)
@@ -126,7 +127,7 @@ public class CpuInstruction {
                 .instructionMnemonic(InstructionMnemonic.JP)
                 .addressMode(AddressMode.A16)
                 .conditionType(ConditionType.C)
-                .instructionExecution(new JpExecution())
+                .instructionExecution(jpExecution)
                 .build());
         tmpInstructions.put((byte) 0xDC, Instruction.builder()
                 .instructionMnemonic(InstructionMnemonic.CALL)
@@ -155,7 +156,7 @@ public class CpuInstruction {
         tmpInstructions.put((byte) 0xE9, Instruction.builder()
                 .instructionMnemonic(InstructionMnemonic.JP)
                 .addressMode(AddressMode.REG)
-                .instructionExecution(new JpExecution())
+                .instructionExecution(jpExecution)
                 .build());
         tmpInstructions.put((byte) 0xEA, Instruction.builder()
                 .instructionMnemonic(InstructionMnemonic.LD)

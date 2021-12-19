@@ -2,13 +2,16 @@ package ru.noion.jgbemu.cpu.instruction;
 
 import ru.noion.jgbemu.Bus;
 import ru.noion.jgbemu.StackUtility;
+import ru.noion.jgbemu.cpu.AddressMode;
 import ru.noion.jgbemu.cpu.CpuState;
 
 public class CallExecution extends ConditionalInstructionExecution {
 
     @Override
     public void execute(CpuState cpuState, Bus bus, Instruction instruction, byte[] data) {
-        executeWithCondition(cpuState, bus, instruction, data);
+        if (instruction.getAddressMode() == AddressMode.A16 && data != null && data.length == 2) {
+            executeWithCondition(cpuState, bus, instruction, data);
+        }
     }
 
     @Override
