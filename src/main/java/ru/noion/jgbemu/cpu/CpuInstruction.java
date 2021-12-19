@@ -8,6 +8,7 @@ import ru.noion.jgbemu.cpu.instruction.CpExecution;
 import ru.noion.jgbemu.cpu.instruction.DiExecution;
 import ru.noion.jgbemu.cpu.instruction.Instruction;
 import ru.noion.jgbemu.cpu.instruction.JpExecution;
+import ru.noion.jgbemu.cpu.instruction.JrExecution;
 import ru.noion.jgbemu.cpu.instruction.LdExecution;
 import ru.noion.jgbemu.cpu.instruction.LdhExecution;
 import ru.noion.jgbemu.cpu.instruction.NopExecution;
@@ -28,18 +29,47 @@ public class CpuInstruction {
         var pushExecution = new PushExecution();
         var callExecution = new CallExecution();
         var jpExecution = new JpExecution();
+        var jrExecution = new JrExecution();
         var tmpInstructions = new HashMap<Byte, Instruction>();
         tmpInstructions.put((byte) 0x00, Instruction.builder()
                 .instructionMnemonic(InstructionMnemonic.NOP)
                 .addressMode(AddressMode.NONE)
                 .instructionExecution(new NopExecution())
                 .build());
-        //TODO add all
+        tmpInstructions.put((byte) 0x18, Instruction.builder()
+                .instructionMnemonic(InstructionMnemonic.JR)
+                .addressMode(AddressMode.R8)
+                .instructionExecution(jrExecution)
+                .build());
+        tmpInstructions.put((byte) 0x20, Instruction.builder()
+                .instructionMnemonic(InstructionMnemonic.JR)
+                .addressMode(AddressMode.R8)
+                .conditionType(ConditionType.NZ)
+                .instructionExecution(jrExecution)
+                .build());
+        tmpInstructions.put((byte) 0x28, Instruction.builder()
+                .instructionMnemonic(InstructionMnemonic.JR)
+                .addressMode(AddressMode.R8)
+                .conditionType(ConditionType.Z)
+                .instructionExecution(jrExecution)
+                .build());
+        tmpInstructions.put((byte) 0x30, Instruction.builder()
+                .instructionMnemonic(InstructionMnemonic.JR)
+                .addressMode(AddressMode.R8)
+                .conditionType(ConditionType.NC)
+                .instructionExecution(jrExecution)
+                .build());
         tmpInstructions.put((byte) 0x31, Instruction.builder()
                 .instructionMnemonic(InstructionMnemonic.LD)
                 .addressMode(AddressMode.D16_REG)
                 .registerTo(RegisterType.SP)
                 .instructionExecution(ldExecution)
+                .build());
+        tmpInstructions.put((byte) 0x38, Instruction.builder()
+                .instructionMnemonic(InstructionMnemonic.JR)
+                .addressMode(AddressMode.R8)
+                .conditionType(ConditionType.C)
+                .instructionExecution(jrExecution)
                 .build());
         tmpInstructions.put((byte) 0x3E, Instruction.builder()
                 .instructionMnemonic(InstructionMnemonic.LD)

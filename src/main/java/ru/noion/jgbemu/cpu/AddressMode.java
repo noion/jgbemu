@@ -19,6 +19,7 @@ public enum AddressMode {
     D16(DataFetchMode.D16),
     D8(DataFetchMode.D8),
     A16(DataFetchMode.D16),
+    R8(DataFetchMode.D8),
     D16_REG(DataFetchMode.D16),
     D8_REG(DataFetchMode.D8),
     MEM_REG(DataFetchMode.D16),
