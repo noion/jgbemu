@@ -25,6 +25,14 @@ public class Registers {
         return PC++;
     }
 
+    public short getSpAndDecrement() {
+        return --SP;
+    }
+
+    public short getSpAndIncrement() {
+        return SP++;
+    }
+
     public boolean getFlagState(Flag flag) {
         return (F >> flag.position & 1) == 1;
     }
@@ -55,6 +63,27 @@ public class Registers {
         switch (registerType) {
             case A:
                 A = value;
+                break;
+            case F:
+                F = value;
+                break;
+            case B:
+                B = value;
+                break;
+            case C:
+                C = value;
+                break;
+            case D:
+                D = value;
+                break;
+            case E:
+                E = value;
+                break;
+            case H:
+                H = value;
+                break;
+            case L:
+                L = value;
                 break;
             default:
                 throw new UnsupportedOperationException(registerType.toString());

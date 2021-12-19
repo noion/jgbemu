@@ -10,6 +10,7 @@ import ru.noion.jgbemu.cpu.instruction.JpExecution;
 import ru.noion.jgbemu.cpu.instruction.LdExecution;
 import ru.noion.jgbemu.cpu.instruction.LdhExecution;
 import ru.noion.jgbemu.cpu.instruction.NopExecution;
+import ru.noion.jgbemu.cpu.instruction.PopExecution;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,6 +22,7 @@ public class CpuInstruction {
 
     static {
         var ldExecution = new LdExecution();
+        var instructionExecution = new PopExecution();
         var tmpInstructions = new HashMap<Byte, Instruction>();
         tmpInstructions.put((byte) 0x00, Instruction.builder()
                 .instructionMnemonic(InstructionMnemonic.NOP)
@@ -40,6 +42,12 @@ public class CpuInstruction {
                 .registerTo(RegisterType.A)
                 .instructionExecution(ldExecution)
                 .build());
+        tmpInstructions.put((byte) 0xC1, Instruction.builder()
+                .instructionMnemonic(InstructionMnemonic.POP)
+                .addressMode(AddressMode.NONE)
+                .registerTo(RegisterType.BC)
+                .instructionExecution(instructionExecution)
+                .build());
         tmpInstructions.put((byte) 0xC3, Instruction.builder()
                 .instructionMnemonic(InstructionMnemonic.JP)
                 .addressMode(AddressMode.D16)
@@ -51,17 +59,35 @@ public class CpuInstruction {
                 .registerTo(RegisterType.A)
                 .instructionExecution(new AdcExecution())
                 .build());
+        tmpInstructions.put((byte) 0xD1, Instruction.builder()
+                .instructionMnemonic(InstructionMnemonic.POP)
+                .addressMode(AddressMode.NONE)
+                .registerTo(RegisterType.DE)
+                .instructionExecution(instructionExecution)
+                .build());
         tmpInstructions.put((byte) 0xE0, Instruction.builder()
                 .instructionMnemonic(InstructionMnemonic.LDH)
                 .addressMode(AddressMode.REG_A8)
                 .registerFrom(RegisterType.A)
                 .instructionExecution(new LdhExecution())
                 .build());
+        tmpInstructions.put((byte) 0xE1, Instruction.builder()
+                .instructionMnemonic(InstructionMnemonic.POP)
+                .addressMode(AddressMode.NONE)
+                .registerTo(RegisterType.HL)
+                .instructionExecution(instructionExecution)
+                .build());
         tmpInstructions.put((byte) 0xEA, Instruction.builder()
                 .instructionMnemonic(InstructionMnemonic.LD)
                 .addressMode(AddressMode.REG_MEM)
                 .registerFrom(RegisterType.A)
                 .instructionExecution(ldExecution)
+                .build());
+        tmpInstructions.put((byte) 0xF1, Instruction.builder()
+                .instructionMnemonic(InstructionMnemonic.POP)
+                .addressMode(AddressMode.NONE)
+                .registerTo(RegisterType.AF)
+                .instructionExecution(instructionExecution)
                 .build());
         tmpInstructions.put((byte) 0xFE, Instruction.builder()
                 .instructionMnemonic(InstructionMnemonic.CP)
