@@ -3,6 +3,7 @@ package ru.noion.jgbemu.cpu;
 import lombok.experimental.UtilityClass;
 import ru.noion.jgbemu.ByteToHexConvertor;
 import ru.noion.jgbemu.cpu.instruction.AdcExecution;
+import ru.noion.jgbemu.cpu.instruction.CallExecution;
 import ru.noion.jgbemu.cpu.instruction.CpExecution;
 import ru.noion.jgbemu.cpu.instruction.DiExecution;
 import ru.noion.jgbemu.cpu.instruction.Instruction;
@@ -25,6 +26,7 @@ public class CpuInstruction {
         var ldExecution = new LdExecution();
         var popExecution = new PopExecution();
         var pushExecution = new PushExecution();
+        var callExecution = new CallExecution();
         var tmpInstructions = new HashMap<Byte, Instruction>();
         tmpInstructions.put((byte) 0x00, Instruction.builder()
                 .instructionMnemonic(InstructionMnemonic.NOP)
@@ -55,11 +57,28 @@ public class CpuInstruction {
                 .addressMode(AddressMode.D16)
                 .instructionExecution(new JpExecution())
                 .build());
+        tmpInstructions.put((byte) 0xC4, Instruction.builder()
+                .instructionMnemonic(InstructionMnemonic.CALL)
+                .addressMode(AddressMode.A16)
+                .conditionType(ConditionType.NZ)
+                .instructionExecution(callExecution)
+                .build());
         tmpInstructions.put((byte) 0xC5, Instruction.builder()
                 .instructionMnemonic(InstructionMnemonic.PUSH)
                 .addressMode(AddressMode.NONE)
                 .registerFrom(RegisterType.BC)
                 .instructionExecution(pushExecution)
+                .build());
+        tmpInstructions.put((byte) 0xCC, Instruction.builder()
+                .instructionMnemonic(InstructionMnemonic.CALL)
+                .addressMode(AddressMode.A16)
+                .conditionType(ConditionType.Z)
+                .instructionExecution(callExecution)
+                .build());
+        tmpInstructions.put((byte) 0xCD, Instruction.builder()
+                .instructionMnemonic(InstructionMnemonic.CALL)
+                .addressMode(AddressMode.A16)
+                .instructionExecution(callExecution)
                 .build());
         tmpInstructions.put((byte) 0xCE, Instruction.builder()
                 .instructionMnemonic(InstructionMnemonic.ADC)
@@ -73,11 +92,23 @@ public class CpuInstruction {
                 .registerTo(RegisterType.DE)
                 .instructionExecution(popExecution)
                 .build());
+        tmpInstructions.put((byte) 0xD4, Instruction.builder()
+                .instructionMnemonic(InstructionMnemonic.CALL)
+                .addressMode(AddressMode.A16)
+                .conditionType(ConditionType.NC)
+                .instructionExecution(callExecution)
+                .build());
         tmpInstructions.put((byte) 0xD5, Instruction.builder()
                 .instructionMnemonic(InstructionMnemonic.PUSH)
                 .addressMode(AddressMode.NONE)
                 .registerFrom(RegisterType.DE)
                 .instructionExecution(pushExecution)
+                .build());
+        tmpInstructions.put((byte) 0xDC, Instruction.builder()
+                .instructionMnemonic(InstructionMnemonic.CALL)
+                .addressMode(AddressMode.A16)
+                .conditionType(ConditionType.C)
+                .instructionExecution(callExecution)
                 .build());
         tmpInstructions.put((byte) 0xE0, Instruction.builder()
                 .instructionMnemonic(InstructionMnemonic.LDH)

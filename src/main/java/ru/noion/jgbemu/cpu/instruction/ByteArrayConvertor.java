@@ -11,4 +11,10 @@ public class ByteArrayConvertor {
         var hi = bytes[1];
         return (short) (UnsignedConvertor.unsigned(lo) | hi << 8);
     }
+
+    public byte[] shortToByteArray(short value) {
+        var lo = (byte) value;
+        var hi = (byte) (value >> 8);
+        return new byte[] {lo, hi};
+    }
 }

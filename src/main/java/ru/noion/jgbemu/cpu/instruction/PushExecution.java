@@ -1,6 +1,7 @@
 package ru.noion.jgbemu.cpu.instruction;
 
 import ru.noion.jgbemu.Bus;
+import ru.noion.jgbemu.StackUtility;
 import ru.noion.jgbemu.cpu.CpuState;
 import ru.noion.jgbemu.cpu.RegisterType;
 import ru.noion.jgbemu.cpu.Registers;
@@ -12,14 +13,13 @@ public class PushExecution implements InstructionExecution {
         var registerFrom = instruction.getRegisterFrom();
         if (registerFrom != null && registerFrom.getRegisterType().length == 2) {
             var registers = cpuState.getRegisters();
-            push(bus, registerFrom.getRegisterType()[0], registers);
-            push(bus, registerFrom.getRegisterType()[1], registers);
+            pushFromRegister(bus, registerFrom.getRegisterType()[0], registers);
+            pushFromRegister(bus, registerFrom.getRegisterType()[1], registers);
         }
     }
 
-    private void push(Bus bus, RegisterType registerType, Registers registers) {
-        var sp = registers.getSpAndDecrement();
+    private void pushFromRegister(Bus bus, RegisterType registerType, Registers registers) {
         var registerData = registers.getRegister(registerType);
-        bus.write(sp, registerData);
+        StackUtility.push(bus, registers, registerData);
     }
 }

@@ -1,6 +1,7 @@
 package ru.noion.jgbemu.cpu.instruction;
 
 import ru.noion.jgbemu.Bus;
+import ru.noion.jgbemu.StackUtility;
 import ru.noion.jgbemu.cpu.CpuState;
 import ru.noion.jgbemu.cpu.RegisterType;
 import ru.noion.jgbemu.cpu.Registers;
@@ -18,12 +19,7 @@ public class PopExecution implements InstructionExecution {
     }
 
     private void popAndSetRegister(Bus bus, RegisterType registerTo, Registers registers) {
-        var pop = pop(registers, bus);
+        var pop = StackUtility.pop(registers, bus);
         registers.setRegister(registerTo, pop);
-    }
-
-    private byte pop(Registers registers, Bus bus) {
-        var sp = registers.getSpAndIncrement();
-        return bus.read(sp);
     }
 }
