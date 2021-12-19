@@ -48,7 +48,7 @@ public class CpuInstruction {
                 .build());
         tmpInstructions.put((byte) 0xC1, Instruction.builder()
                 .instructionMnemonic(InstructionMnemonic.POP)
-                .addressMode(AddressMode.NONE)
+                .addressMode(AddressMode.REG)
                 .registerTo(RegisterType.BC)
                 .instructionExecution(popExecution)
                 .build());
@@ -65,7 +65,7 @@ public class CpuInstruction {
                 .build());
         tmpInstructions.put((byte) 0xC5, Instruction.builder()
                 .instructionMnemonic(InstructionMnemonic.PUSH)
-                .addressMode(AddressMode.NONE)
+                .addressMode(AddressMode.REG)
                 .registerFrom(RegisterType.BC)
                 .instructionExecution(pushExecution)
                 .build());
@@ -88,7 +88,7 @@ public class CpuInstruction {
                 .build());
         tmpInstructions.put((byte) 0xD1, Instruction.builder()
                 .instructionMnemonic(InstructionMnemonic.POP)
-                .addressMode(AddressMode.NONE)
+                .addressMode(AddressMode.REG)
                 .registerTo(RegisterType.DE)
                 .instructionExecution(popExecution)
                 .build());
@@ -100,7 +100,7 @@ public class CpuInstruction {
                 .build());
         tmpInstructions.put((byte) 0xD5, Instruction.builder()
                 .instructionMnemonic(InstructionMnemonic.PUSH)
-                .addressMode(AddressMode.NONE)
+                .addressMode(AddressMode.REG)
                 .registerFrom(RegisterType.DE)
                 .instructionExecution(pushExecution)
                 .build());
@@ -118,13 +118,13 @@ public class CpuInstruction {
                 .build());
         tmpInstructions.put((byte) 0xE1, Instruction.builder()
                 .instructionMnemonic(InstructionMnemonic.POP)
-                .addressMode(AddressMode.NONE)
+                .addressMode(AddressMode.REG)
                 .registerTo(RegisterType.HL)
                 .instructionExecution(popExecution)
                 .build());
         tmpInstructions.put((byte) 0xE5, Instruction.builder()
                 .instructionMnemonic(InstructionMnemonic.PUSH)
-                .addressMode(AddressMode.NONE)
+                .addressMode(AddressMode.REG)
                 .registerFrom(RegisterType.HL)
                 .instructionExecution(pushExecution)
                 .build());
@@ -136,13 +136,13 @@ public class CpuInstruction {
                 .build());
         tmpInstructions.put((byte) 0xF1, Instruction.builder()
                 .instructionMnemonic(InstructionMnemonic.POP)
-                .addressMode(AddressMode.NONE)
+                .addressMode(AddressMode.REG)
                 .registerTo(RegisterType.AF)
                 .instructionExecution(popExecution)
                 .build());
         tmpInstructions.put((byte) 0xF5, Instruction.builder()
                 .instructionMnemonic(InstructionMnemonic.PUSH)
-                .addressMode(AddressMode.NONE)
+                .addressMode(AddressMode.REG)
                 .registerFrom(RegisterType.AF)
                 .instructionExecution(pushExecution)
                 .build());
