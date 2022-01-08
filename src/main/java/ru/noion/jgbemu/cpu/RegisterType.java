@@ -26,6 +26,6 @@ public enum RegisterType {
     private final RegisterType[] registerType;
 
     RegisterType() {
-        this.registerType = new RegisterType[]{RegisterType.valueOf(this.toString())};
+        this.registerType = null;
     }
 }
